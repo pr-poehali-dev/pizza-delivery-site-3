@@ -1,18 +1,15 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, User, Menu } from 'lucide-react';
+import { User, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Badge } from '@/components/ui/badge';
+import CartDrawer from '@/components/CartDrawer';
 
 const Header: React.FC = () => {
-  const cartItemsCount = 0; // В будущем будет получаться из контекста корзины
-
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
       <div className="container flex items-center justify-between h-16 px-4 mx-auto md:px-6">
@@ -50,15 +47,7 @@ const Header: React.FC = () => {
         </nav>
         
         <div className="flex items-center gap-4">
-          <Link to="/cart" className="relative">
-            <ShoppingCart className="w-5 h-5" />
-            {cartItemsCount > 0 && (
-              <Badge variant="destructive" className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
-                {cartItemsCount}
-              </Badge>
-            )}
-            <span className="sr-only">Корзина</span>
-          </Link>
+          <CartDrawer />
           <Link to="/profile">
             <User className="w-5 h-5" />
             <span className="sr-only">Профиль</span>

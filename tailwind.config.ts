@@ -1,5 +1,12 @@
 import { defineConfig } from "tailwindcss";
-export default defineConfig({
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+import type { Config } from "tailwindcss";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const config = {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -55,16 +62,10 @@ export default defineConfig({
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
           border: "hsl(var(--sidebar-border))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           ring: "hsl(var(--sidebar-ring))",
-          primary: {
-            DEFAULT: "hsl(var(--sidebar-primary))",
-            foreground: "hsl(var(--sidebar-primary-foreground))",
-          },
-          accent: {
-            DEFAULT: "hsl(var(--sidebar-accent))",
-            foreground: "hsl(var(--sidebar-accent-foreground))",
-          }
-        }
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -87,6 +88,12 @@ export default defineConfig({
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
-});
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
+
+// Add defineConfig around config
+const TailwindConfig = defineConfig(config);
+
+// Export the config
+export default TailwindConfig;
 }
